@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+#VisualStudio Files
+*.sdf
+*.suo
+ipch/
+[Bb]uild/
+obj/
+Win32UEFI/[Dd]ebug/
+Win32UEFI/[Rr]elease/
