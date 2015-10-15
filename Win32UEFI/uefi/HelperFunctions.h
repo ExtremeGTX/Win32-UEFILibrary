@@ -5,5 +5,5 @@
 
 extern BOOL isUEFIAvailable();
 extern int wstrlen(const WCHAR* str);
-
+extern BOOL FindItem(UINT16* arr, UINT16 val, UINT16 length);
 #endif

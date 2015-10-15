@@ -218,15 +218,12 @@ BOOL MakeMediaBootOption(UINT32 Attributes, WCHAR* Description, WCHAR* DiskLette
 
 int GetNewBootOptionID()
 {
-	int BootOptionID = _BootOrder[0];
-	for (int i = 0; i < BootCount; i++)
+	int BootOptionID = 0;
+	while (FindItem(_BootOrder, BootOptionID, BootCount))
 	{
-		if (_BootOrder[i] > BootOptionID)
-		{
-			BootOptionID = _BootOrder[i];
-		}
+		BootOptionID++;
 	}
-	BootOptionID++;
+	
 
 	if (BootOptionID >= EFI_BOOT_LIST_LEN)
 		return -1;

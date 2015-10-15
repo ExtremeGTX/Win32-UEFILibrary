@@ -20,3 +20,15 @@ int wstrlen(const WCHAR* str)
 	return (wcslen(str) + 1) * 2;
 }
 
+BOOL FindItem(UINT16* arr, UINT16 val, UINT16 length)
+{
+	for (int i = 0; i < length; i++)
+	{
+		if (val == arr[i])
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
