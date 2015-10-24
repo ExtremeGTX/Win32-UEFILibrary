@@ -17,4 +17,6 @@
 
 
 // TODO: reference additional headers your program requires here
+#define _DEBUG_INFO
+#include "dbg.h"
 #include "uefi\efi.h"

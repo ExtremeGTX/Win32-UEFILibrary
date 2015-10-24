@@ -4,6 +4,7 @@
 #include "DevicePath.h"
 #include "efiparser.h"
 
+
 #define EFI_BOOT_LIST_LEN 20
 BDS_LOAD_OPTION** _BootOptions;
 EFI_BOOT_ORDER	 _BootOrder[EFI_BOOT_LIST_LEN];
@@ -18,6 +19,7 @@ BOOL efi_init()
 
 	if (_BootOptions == NULL)
 	{
+		DBG_INFO("Failed to Allocate Bootlist\n");
 		return false;
 	}
 
@@ -31,10 +33,12 @@ EFI_BOOT_ORDER* GetBootList()
 
 	if (!len)
 	{
+		DBG_INFO("Failed to Read Bootlist\n");
 		return NULL;
 	}
 
 	BootCount = len / sizeof(UINT16);	/* Get Number of available boot options */
+	DBG_INFO("BootCount: %d\n", BootCount);
 
 	return _BootOrder;
 }
@@ -50,7 +54,10 @@ BDS_LOAD_OPTION** GetBootDevices()
 		_BootOptions[i] = GetBootEntry(BootEntry, i);
 
 		if (_BootOptions[i] == NULL)
+		{
+			DBG_INFO("Fail to Read BootOptions, %d\n",i);
 			return NULL;
+		}
 	}
 	return _BootOptions;
 }
@@ -70,6 +77,7 @@ int DeleteBootOptionByDescription(WCHAR* Description)
 
 		if (wcscmp(Description, p->Description) == 0)
 		{
+			DBG_INFO("Delete BootOption ID:%d Entry:%d\n", _BootOrder[i],i);
 			DeleteBootOption(_BootOrder[i]);
 			return _BootOrder[i];
 		}
@@ -88,10 +96,10 @@ void DeleteBootOption(int id)
 	{
 		switch (GetLastError()){
 		case ERROR_ENVVAR_NOT_FOUND:
-			printf("Error Removing param: ERROR_ENVVAR_NOT_FOUND\n");
+			DBG_INFO("Error Removing param: ERROR_ENVVAR_NOT_FOUND\n");
 			break;
 		default:
-			printf("Error Removing param: %d\n", GetLastError());
+			DBG_INFO("Error Removing param: %d\n", GetLastError());
 		}
 	}
 
@@ -101,6 +109,7 @@ void DeleteBootOption(int id)
 	{
 		if (_BootOrder[i] == id)
 		{
+			DBG_INFO("Entry Found at: %d\n", i);
 			wmemcpy(&p[i], &p[i + 1], (BootCount - 1) - i);
 			BootCount--;
 			wmemset(&p[BootCount], 0x00, EFI_BOOT_LIST_LEN - BootCount);
@@ -144,8 +153,10 @@ BOOL MakeMediaBootOption(UINT32 Attributes, WCHAR* Description, WCHAR* DiskLette
 	EFI_DEVICE_PATH_PROTOCOL* ed = BuildDevicePathEnd();
 
 	if (hd == NULL || fd == NULL || ed == NULL)
+	{
+		DBG_INFO("Building FilePathList failed\n");
 		return false;
-
+	}
 	/* Build Option Header */
 	NewEntry.Attributes = LOAD_OPTION_ACTIVE;
 	NewEntry.FilePathListLength = sizeof(HARDDRIVE_DEVICE_PATH) /* HDD */
@@ -188,13 +199,16 @@ BOOL MakeMediaBootOption(UINT32 Attributes, WCHAR* Description, WCHAR* DiskLette
 
 	if (!ValidateBootEntry(EFIbuffer))
 	{
+		DBG_INFO("Validation Error\n");
 		return false;
 	}
 
 	int BootID = GetNewBootOptionID();
 	if (BootID == -1)
+	{
+		DBG_INFO("BOOT_ID out of bounds\n");
 		return false;
-
+	}
 	WCHAR BootEntry[10] = L"BootFFFF";		/* change #### with 0001,0002, etc. 8 char + 1 terminator + 1 dummy (useless) */
 	swprintf_s(BootEntry, 10, L"Boot%04X", BootID);
 
@@ -203,16 +217,19 @@ BOOL MakeMediaBootOption(UINT32 Attributes, WCHAR* Description, WCHAR* DiskLette
 	ret = SetFirmwareEnvironmentVariable(BootEntry, EFI_GLOBAL_VARIABLE, EFIbuffer, byteCounter);
 	if (ret == 0)
 	{
+		DBG_INFO("Write Boot Entry Fail\n");
 		return false;
 	}
 
 	_BootOrder[BootCount] = BootID;
 	BootCount++;
 	if (!UpdateBootOrder())
+	{
+		DBG_INFO("Update Fail\n");
 		return false;
+	}
 
-
-
+	DBG_INFO("NewEntry:%s,%d %s\n", BootEntry, (BootCount-1), Description);
 	return true;
 }
 

@@ -39,6 +39,7 @@ BDS_LOAD_OPTION* GetBootEntry(LPCWSTR BootEntry, int id)
 	pBootEntry->Description = ALLOCATE_WCHAR_STRING(descSize);
 	memcpy(pBootEntry->Description, DESCRIPTION_OFFSET(buffer), descSize);
 	
+	DBG_INFO("%s,%d : %s\n",BootEntry, id, pBootEntry->Description);
 	//Get FilePathList
 	pBootEntry->FilePathList = (EFI_DEVICE_PATH_PROTOCOL*)calloc(1, pBootEntry->FilePathListLength);
 	if (!pBootEntry->FilePathList)

@@ -23,7 +23,8 @@ EXTERN_C{
 WIN32UEFIFUNC_API BOOL UEFI_Init()
 {
 	
-	
+	DBG_INIT();
+
 	if (GetBootList() == NULL)
 		return false;
 
@@ -38,6 +39,7 @@ WIN32UEFIFUNC_API BOOL UEFI_Init()
 
 WIN32UEFIFUNC_API void UEFI_MakeMediaBootOption(WCHAR* Description, WCHAR* DiskLetter, WCHAR* Path)
 {
+	DBG_INFO("===New BootOption===\n");
 	MakeMediaBootOption(LOAD_OPTION_ACTIVE, Description, DiskLetter, Path);
 }
 
@@ -48,6 +50,7 @@ WIN32UEFIFUNC_API void UEFI_DeleteBootOption()
 
 WIN32UEFIFUNC_API int UEFI_DeleteBootOptionByDescription(WCHAR* Description)
 {
+	DBG_INFO("===Delete BootOptionBD===\n");
 	return DeleteBootOptionByDescription(Description);
 }
 
