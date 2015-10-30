@@ -7,10 +7,10 @@
 BDS_LOAD_OPTION* GetBootEntry(LPCWSTR BootEntry, int id)
 {
 	int len;
-	UINT8 buffer[512];					//Block of bytes
+	UINT8 buffer[BUFFER_SIZE];					//Block of bytes
 	BDS_LOAD_OPTION* pBootEntry;
 
-	len = GetFirmwareEnvironmentVariable(BootEntry, EFI_GLOBAL_VARIABLE, buffer, sizeof(char) * 512); //EFI Variables names are case sensitive
+	len = GetFirmwareEnvironmentVariable(BootEntry, EFI_GLOBAL_VARIABLE, buffer, sizeof(char) * BUFFER_SIZE); //EFI Variables names are case sensitive
 
 	if (!len)
 		return NULL;

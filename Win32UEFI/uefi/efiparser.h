@@ -12,6 +12,7 @@
 #define FILEPATHLIST_OFFSET(buf,offset)		(UINT8*)(DESCRIPTION_OFFSET_PTR(buffer) + offset);
 
 
+#define BUFFER_SIZE	4096
 
 extern BDS_LOAD_OPTION* GetBootEntry(LPCWSTR BootEntry, int id);
 extern void GetFilePathList(BDS_LOAD_OPTION* BdsLoadOption, char* buffer, int descSize);
