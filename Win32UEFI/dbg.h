@@ -1,6 +1,7 @@
 #ifndef __DBG_H_
 #define __DBG_H_
 
+#include <stdio.h>
 
 extern void DebugInit();
 extern void WriteDebugInfo(const char* format, ...);

@@ -15,75 +15,60 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="includes\WindowsSecurity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="uefi\DevicePath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="uefi\DiskInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="uefi\efi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\efi_common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\efi_types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\EFIFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\EFIMacros.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\efiparser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="uefi\HelperFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dbg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32UEFI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\uefi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\uefi_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\uefi_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\uefi_parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="uefi\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="dbg.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Win32UEFI.cpp">
+    <ClCompile Include="uefi\DevicePath.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dllmain.cpp">
+    <ClCompile Include="uefi\DiskInfo.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uefi\DevicePath.cpp">
+    <ClCompile Include="Win32UEFI.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uefi\DiskInfo.cpp">
+    <ClCompile Include="uefi\utils.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uefi\EFIFunctions.cpp">
+    <ClCompile Include="uefi\uefi_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="uefi\efiparser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="uefi\HelperFunctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="dbg.cpp">
+    <ClCompile Include="uefi\uefi_parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

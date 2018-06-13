@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -42,13 +42,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;WIN32UEFI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -56,6 +57,9 @@
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <CompileAs>CompileAsC</CompileAs>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -83,43 +87,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="dbg.h" />
-    <ClInclude Include="includes\WindowsSecurity.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="uefi\common.h" />
+    <ClInclude Include="Win32UEFI.h" />
     <ClInclude Include="uefi\DevicePath.h" />
     <ClInclude Include="uefi\DiskInfo.h" />
-    <ClInclude Include="uefi\efi.h" />
-    <ClInclude Include="uefi\EFIFunctions.h" />
-    <ClInclude Include="uefi\EFIMacros.h" />
-    <ClInclude Include="uefi\efiparser.h" />
-    <ClInclude Include="uefi\efi_common.h" />
-    <ClInclude Include="uefi\efi_types.h" />
-    <ClInclude Include="uefi\HelperFunctions.h" />
+    <ClInclude Include="uefi\uefi.h" />
+    <ClInclude Include="uefi\uefi_main.h" />
+    <ClInclude Include="uefi\uefi_parser.h" />
+    <ClInclude Include="uefi\uefi_types.h" />
+    <ClInclude Include="uefi\utils.h" />
+    <ClInclude Include="uefi\types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dbg.cpp" />
-    <ClCompile Include="dllmain.cpp">
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </PrecompiledHeader>
-      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="uefi\DevicePath.cpp" />
-    <ClCompile Include="uefi\DiskInfo.cpp" />
-    <ClCompile Include="uefi\EFIFunctions.cpp" />
-    <ClCompile Include="uefi\efiparser.cpp" />
-    <ClCompile Include="uefi\HelperFunctions.cpp" />
-    <ClCompile Include="Win32UEFI.cpp" />
+    <ClCompile Include="dbg.c" />
+    <ClCompile Include="uefi\DevicePath.c" />
+    <ClCompile Include="uefi\DiskInfo.c" />
+    <ClCompile Include="uefi\uefi_main.c" />
+    <ClCompile Include="uefi\uefi_parser.c" />
+    <ClCompile Include="uefi\utils.c" />
+    <ClCompile Include="Win32UEFI.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

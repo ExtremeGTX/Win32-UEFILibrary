@@ -30,6 +30,7 @@
 #VisualStudio Files
 *.sdf
 *.suo
+*.VC.db
 ipch/
 [Bb]uild/
 obj/

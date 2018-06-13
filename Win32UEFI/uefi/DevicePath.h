@@ -1,8 +1,7 @@
 #ifndef _DEVICE_PATH_H_
 #define _DEVICE_PATH_H_
 
-#include "efi_common.h"
-#include "DiskInfo.h"
+#include "uefi_types.h"
 
 /* functions prototypes */
 extern HARDDRIVE_DEVICE_PATH* BuildHardDrivePath(const WCHAR* DiskLetter);
